@@ -69,7 +69,7 @@
       </parent>
       <joint>
         <jointname>T2Blok</jointname>
-        <type>T2</type>
+        <type>T3</type>
         <nature>independent</nature>
         <initialvalue>
           <q>0.185</q>
@@ -91,7 +91,7 @@
       <graphics>
         <x2D>
           <position>
-            <x>-86.0</x>
+            <x>-87.0</x>
             <y>-45.0</y>
           </position>
           <name_pos>
@@ -105,19 +105,19 @@
           </size>
           <control_points>
             <control_point>
-              <x>156.0</x>
+              <x>155.0</x>
               <y>-45.0</y>
             </control_point>
             <control_point>
-              <x>156.0</x>
+              <x>155.0</x>
               <y>48.0</y>
             </control_point>
             <control_point>
-              <x>-86.0</x>
+              <x>-87.0</x>
               <y>48.0</y>
             </control_point>
             <control_point>
-              <x>-86.0</x>
+              <x>-87.0</x>
               <y>-45.0</y>
             </control_point>
           </control_points>
@@ -138,8 +138,8 @@
       </parent>
       <joint>
         <jointname>R3Crankshaft</jointname>
-        <type>R3</type>
-        <nature>independent</nature>
+        <type>R1</type>
+        <nature>dependent</nature>
         <initialvalue>
           <qd>100.0</qd>
         </initialvalue>
@@ -161,7 +161,7 @@
         <coordinates>
           <x>0.0</x>
           <y>0.0</y>
-          <z>0.00147</z>
+          <z>-0.00147</z>
         </coordinates>
       </com>
       <inertia>
@@ -170,9 +170,9 @@
       <point>
         <pointname>CrankshaftRod</pointname>
         <coordinates>
-          <x>0.036</x>
+          <x>0.0</x>
           <y>0.0</y>
-          <z>0.0</z>
+          <z>0.036</z>
         </coordinates>
         <graphics>
           <x2D>
@@ -222,7 +222,7 @@
       </parent>
       <joint>
         <jointname>R3Shaft</jointname>
-        <type>R3</type>
+        <type>R1</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>
@@ -251,15 +251,15 @@
       <point>
         <pointname>RodPiston</pointname>
         <coordinates>
-          <x>0.123</x>
+          <x>0.0</x>
           <y>0.0</y>
-          <z>0.0</z>
+          <z>0.123</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>668.0</x>
-              <y>157.0</y>
+              <x>669.0</x>
+              <y>156.0</y>
             </position>
           </x2D>
           <x3D />
@@ -268,8 +268,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>13.0</x>
-            <y>-12.0</y>
+            <x>14.0</x>
+            <y>-13.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -282,8 +282,8 @@
           </size>
           <control_points>
             <control_point>
-              <x>89.0</x>
-              <y>-12.0</y>
+              <x>90.0</x>
+              <y>-13.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -303,7 +303,7 @@
       </parent>
       <joint>
         <jointname>T2Piston</jointname>
-        <type>T2</type>
+        <type>T3</type>
         <nature>dependent</nature>
         <graphics>
           <x2D>

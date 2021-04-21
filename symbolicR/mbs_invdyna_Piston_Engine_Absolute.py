@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr 21 04:51:22 2021
+#	==> Generation Date: Wed Apr 21 08:00:53 2021
 #
 #	==> Project name: Piston_Engine_Absolute
 #
@@ -41,32 +41,36 @@ def invdyna(phi,s,tsim):
  
 # Forward Kinematics
 
-    BS12 = -qd[2]*qd[2]
-    ALPHA12 = qdd[1]*S2
-    ALPHA22 = qdd[1]*C2
-    ALPHA13 = C3*(ALPHA12+BS12*s.dpt[1,1])+S3*(ALPHA22+qdd[2]*s.dpt[1,1])
-    ALPHA23 = C3*(ALPHA22+qdd[2]*s.dpt[1,1])-S3*(ALPHA12+BS12*s.dpt[1,1])
-    ALPHA24 = qdd[1]+qdd[4]
+    BS92 = -qd[2]*qd[2]
+    ALPHA22 = qdd[1]*S2
+    ALPHA32 = qdd[1]*C2
+    OM13 = qd[2]+qd[3]
+    OMp13 = qdd[2]+qdd[3]
+    BS93 = -OM13*OM13
+    ALPHA23 = C3*(ALPHA22-qdd[2]*s.dpt[3,1])+S3*(ALPHA32+BS92*s.dpt[3,1])
+    ALPHA33 = C3*(ALPHA32+BS92*s.dpt[3,1])-S3*(ALPHA22-qdd[2]*s.dpt[3,1])
+    ALPHA34 = qdd[1]+qdd[4]
  
 # Backward Dynamics
 
-    Fs24 = -s.frc[2,4]+s.m[4]*ALPHA24
-    Fs13 = -s.frc[1,3]+s.m[3]*ALPHA13
-    Fs23 = -s.frc[2,3]+s.m[3]*ALPHA23
-    Fs12 = -s.frc[1,2]+s.m[2]*ALPHA12
-    Fs22 = -s.frc[2,2]+s.m[2]*ALPHA22
-    Fq12 = Fs12+Fs13*C3-Fs23*S3
-    Fq22 = Fs22+Fs13*S3+Fs23*C3
-    Cq32 = -s.trq[3,2]-s.trq[3,3]+s.dpt[1,1]*(Fs13*S3+Fs23*C3)
-    Fs21 = -s.frc[2,1]+qdd[1]*s.m[1]
-    Fq21 = Fs21+Fs24+Fq12*S2+Fq22*C2
+    Fs34 = -s.frc[3,4]+s.m[4]*ALPHA34
+    Fs23 = -s.frc[2,3]+s.m[3]*(ALPHA23-OMp13*s.l[3,3])
+    Fs33 = -s.frc[3,3]+s.m[3]*(ALPHA33+BS93*s.l[3,3])
+    Cq13 = -s.trq[1,3]+s.In[1,3]*OMp13-Fs23*s.l[3,3]
+    Fs22 = -s.frc[2,2]+s.m[2]*(ALPHA22-qdd[2]*s.l[3,2])
+    Fs32 = -s.frc[3,2]+s.m[2]*(ALPHA32+BS92*s.l[3,2])
+    Fq22 = Fs22+Fs23*C3-Fs33*S3
+    Fq32 = Fs32+Fs23*S3+Fs33*C3
+    Cq12 = -s.trq[1,2]+Cq13+qdd[2]*s.In[1,2]-Fs22*s.l[3,2]-s.dpt[3,1]*(Fs23*C3-Fs33*S3)
+    Fs31 = -s.frc[3,1]+qdd[1]*s.m[1]
+    Fq31 = Fs31+Fs34+Fq22*S2+Fq32*C2
  
 # Symbolic model output
 
-    Qq[1] = Fq21
-    Qq[2] = Cq32
-    Qq[3] = -s.trq[3,3]
-    Qq[4] = Fs24
+    Qq[1] = Fq31
+    Qq[2] = Cq12
+    Qq[3] = Cq13
+    Qq[4] = Fs34
 
 # Number of continuation lines = 0
 

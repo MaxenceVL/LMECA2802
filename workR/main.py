@@ -44,12 +44,20 @@ mbs_part = Robotran.MbsPart(mbs_data)
 mbs_part.set_options(rowperm=1, verbose=1)
 mbs_part.run()
 
+#%%==============================================================================
+# Static Equilibrium
+#==============================================================================
+#mbs_data.process = 2
+#mbs_equil = Robotran.MbsEquil(mbs_data)
+#mbs_equil.set_options(method = 1, senstol = 1e-2, verbose = 1,soft = 0, itermax =1000, mode =1,equitol=1e-10)
+#Forcer les roues pour l'equilibre
+#mbs_equil.run()
 # %%===========================================================================
 # Direct Dynamics
 # =============================================================================
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-3, tf=3.0, save2file=1)
 results = mbs_dirdyn.run()
 
 # %%===========================================================================
@@ -75,3 +83,4 @@ axis.set_xlabel('Time (s)')
 axis.set_ylabel('Coordinate value (m or rad)')
 
 plt.show()
+print('passed Plotting')

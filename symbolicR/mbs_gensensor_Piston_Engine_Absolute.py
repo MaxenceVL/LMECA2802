@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr 21 04:51:22 2021
+#	==> Generation Date: Wed Apr 21 08:00:53 2021
 #
 #	==> Project name: Piston_Engine_Absolute
 #
@@ -36,8 +36,6 @@ def sensor(sens, s, isens):
   C2 = cos(q[2])
   S3 = sin(q[3])
   C3 = cos(q[3])
-  C2p3 = C2*C3-S2*S3
-  S2p3 = C2*S3+S2*C3
  
 # Augmented Joint Position Vectors
 
@@ -48,21 +46,21 @@ def sensor(sens, s, isens):
   if (isens == 1): 
 
     sens.P[1] = 0
-    sens.P[2] = q[1]
-    sens.P[3] = 0
+    sens.P[2] = 0
+    sens.P[3] = q[1]
     sens.R[1,1] = (1.0)
     sens.R[2,2] = (1.0)
     sens.R[3,3] = (1.0)
     sens.V[1] = 0
-    sens.V[2] = qd[1]
-    sens.V[3] = 0
+    sens.V[2] = 0
+    sens.V[3] = qd[1]
     sens.OM[1] = 0
     sens.OM[2] = 0
     sens.OM[3] = 0
-    sens.J[2,1] = (1.0)
+    sens.J[3,1] = (1.0)
     sens.A[1] = 0
-    sens.A[2] = qdd[1]
-    sens.A[3] = 0
+    sens.A[2] = 0
+    sens.A[3] = qdd[1]
     sens.OMP[1] = 0
     sens.OMP[2] = 0
     sens.OMP[3] = 0
@@ -70,88 +68,92 @@ def sensor(sens, s, isens):
   if (isens == 2): 
 
     sens.P[1] = 0
-    sens.P[2] = q[1]
-    sens.P[3] = 0
-    sens.R[1,1] = C2
-    sens.R[1,2] = S2
-    sens.R[2,1] = -S2
+    sens.P[2] = 0
+    sens.P[3] = q[1]
+    sens.R[1,1] = (1.0)
     sens.R[2,2] = C2
-    sens.R[3,3] = (1.0)
+    sens.R[2,3] = S2
+    sens.R[3,2] = -S2
+    sens.R[3,3] = C2
     sens.V[1] = 0
-    sens.V[2] = qd[1]
-    sens.V[3] = 0
-    sens.OM[1] = 0
+    sens.V[2] = 0
+    sens.V[3] = qd[1]
+    sens.OM[1] = qd[2]
     sens.OM[2] = 0
-    sens.OM[3] = qd[2]
-    sens.J[2,1] = (1.0)
-    sens.J[6,2] = (1.0)
+    sens.OM[3] = 0
+    sens.J[3,1] = (1.0)
+    sens.J[4,2] = (1.0)
     sens.A[1] = 0
-    sens.A[2] = qdd[1]
-    sens.A[3] = 0
-    sens.OMP[1] = 0
+    sens.A[2] = 0
+    sens.A[3] = qdd[1]
+    sens.OMP[1] = qdd[2]
     sens.OMP[2] = 0
-    sens.OMP[3] = qdd[2]
+    sens.OMP[3] = 0
 
   if (isens == 3): 
 
-    RLcp3_13 = s.dpt[1,1]*C2
-    RLcp3_23 = s.dpt[1,1]*S2
-    POcp3_23 = RLcp3_23+q[1]
-    OMcp3_33 = qd[2]+qd[3]
-    ORcp3_13 = -RLcp3_23*qd[2]
-    ORcp3_23 = RLcp3_13*qd[2]
-    VIcp3_23 = ORcp3_23+qd[1]
-    OPcp3_33 = qdd[2]+qdd[3]
-    ACcp3_13 = -ORcp3_23*qd[2]-RLcp3_23*qdd[2]
-    ACcp3_23 = qdd[1]+ORcp3_13*qd[2]+RLcp3_13*qdd[2]
-    sens.P[1] = RLcp3_13
-    sens.P[2] = POcp3_23
-    sens.P[3] = 0
-    sens.R[1,1] = C2p3
-    sens.R[1,2] = S2p3
-    sens.R[2,1] = -S2p3
-    sens.R[2,2] = C2p3
-    sens.R[3,3] = (1.0)
-    sens.V[1] = ORcp3_13
-    sens.V[2] = VIcp3_23
-    sens.V[3] = 0
-    sens.OM[1] = 0
+    ROcp3_53 = C2*C3-S2*S3
+    ROcp3_63 = C2*S3+S2*C3
+    ROcp3_83 = -C2*S3-S2*C3
+    ROcp3_93 = C2*C3-S2*S3
+    RLcp3_23 = -s.dpt[3,1]*S2
+    RLcp3_33 = s.dpt[3,1]*C2
+    POcp3_33 = RLcp3_33+q[1]
+    OMcp3_13 = qd[2]+qd[3]
+    ORcp3_23 = -RLcp3_33*qd[2]
+    ORcp3_33 = RLcp3_23*qd[2]
+    VIcp3_33 = ORcp3_33+qd[1]
+    OPcp3_13 = qdd[2]+qdd[3]
+    ACcp3_23 = -ORcp3_33*qd[2]-RLcp3_33*qdd[2]
+    ACcp3_33 = qdd[1]+ORcp3_23*qd[2]+RLcp3_23*qdd[2]
+    sens.P[1] = 0
+    sens.P[2] = RLcp3_23
+    sens.P[3] = POcp3_33
+    sens.R[1,1] = (1.0)
+    sens.R[2,2] = ROcp3_53
+    sens.R[2,3] = ROcp3_63
+    sens.R[3,2] = ROcp3_83
+    sens.R[3,3] = ROcp3_93
+    sens.V[1] = 0
+    sens.V[2] = ORcp3_23
+    sens.V[3] = VIcp3_33
+    sens.OM[1] = OMcp3_13
     sens.OM[2] = 0
-    sens.OM[3] = OMcp3_33
-    sens.J[1,2] = -RLcp3_23
-    sens.J[2,1] = (1.0)
-    sens.J[2,2] = RLcp3_13
-    sens.J[6,2] = (1.0)
-    sens.J[6,3] = (1.0)
-    sens.A[1] = ACcp3_13
+    sens.OM[3] = 0
+    sens.J[2,2] = -RLcp3_33
+    sens.J[3,1] = (1.0)
+    sens.J[3,2] = RLcp3_23
+    sens.J[4,2] = (1.0)
+    sens.J[4,3] = (1.0)
+    sens.A[1] = 0
     sens.A[2] = ACcp3_23
-    sens.A[3] = 0
-    sens.OMP[1] = 0
+    sens.A[3] = ACcp3_33
+    sens.OMP[1] = OPcp3_13
     sens.OMP[2] = 0
-    sens.OMP[3] = OPcp3_33
+    sens.OMP[3] = 0
 
   if (isens == 4): 
 
-    POcp4_22 = q[1]+q[4]
-    VIcp4_22 = qd[1]+qd[4]
-    ACcp4_22 = qdd[1]+qdd[4]
+    POcp4_32 = q[1]+q[4]
+    VIcp4_32 = qd[1]+qd[4]
+    ACcp4_32 = qdd[1]+qdd[4]
     sens.P[1] = 0
-    sens.P[2] = POcp4_22
-    sens.P[3] = 0
+    sens.P[2] = 0
+    sens.P[3] = POcp4_32
     sens.R[1,1] = (1.0)
     sens.R[2,2] = (1.0)
     sens.R[3,3] = (1.0)
     sens.V[1] = 0
-    sens.V[2] = VIcp4_22
-    sens.V[3] = 0
+    sens.V[2] = 0
+    sens.V[3] = VIcp4_32
     sens.OM[1] = 0
     sens.OM[2] = 0
     sens.OM[3] = 0
-    sens.J[2,1] = (1.0)
-    sens.J[2,4] = (1.0)
+    sens.J[3,1] = (1.0)
+    sens.J[3,4] = (1.0)
     sens.A[1] = 0
-    sens.A[2] = ACcp4_22
-    sens.A[3] = 0
+    sens.A[2] = 0
+    sens.A[3] = ACcp4_32
     sens.OMP[1] = 0
     sens.OMP[2] = 0
     sens.OMP[3] = 0

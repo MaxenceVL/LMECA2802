@@ -38,5 +38,5 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
     K = 30000
     D = 5000
     L0 = 0.2
-    mbs_data.Qq[T2Blok] = - ( K*(mbs_data.q[T2Blok]-L0) + C*mbs_data.qd[T2Blok] )
+    mbs_data.Qq[T2Blok] = - ( K*(mbs_data.q[T2Blok]-L0) + D*mbs_data.qd[T2Blok] )
     return Flink

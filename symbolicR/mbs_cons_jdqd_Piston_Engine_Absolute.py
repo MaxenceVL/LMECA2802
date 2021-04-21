@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr 21 04:51:22 2021
+#	==> Generation Date: Wed Apr 21 08:00:53 2021
 #
 #	==> Project name: Piston_Engine_Absolute
 #
@@ -33,8 +33,6 @@ def cons_jdqd(Jdqd, s):
     C2 = cos(q[2])
     S3 = sin(q[3])
     C3 = cos(q[3])
-    C2p3 = C2*C3-S2*S3
-    S2p3 = C2*S3+S2*C3
  
 # Augmented Joint Position Vectors
 
@@ -44,21 +42,23 @@ def cons_jdqd(Jdqd, s):
  
 # Constraints Quadratic Terms
 
-    RLjdqd1_12 = s.dpt[1,1]*C2
-    RLjdqd1_22 = s.dpt[1,1]*S2
-    OMjdqd1_32 = qd[2]+qd[3]
-    ORjdqd1_12 = -RLjdqd1_22*qd[2]
-    ORjdqd1_22 = RLjdqd1_12*qd[2]
-    Apqpjdqd1_12 = -ORjdqd1_22*qd[2]
-    Apqpjdqd1_22 = ORjdqd1_12*qd[2]
-    RLjdqd1_13 = s.dpt[1,2]*C2p3
-    RLjdqd1_23 = s.dpt[1,2]*S2p3
-    ORjdqd1_13 = -OMjdqd1_32*RLjdqd1_23
-    ORjdqd1_23 = OMjdqd1_32*RLjdqd1_13
-    Apqpjdqd1_13 = Apqpjdqd1_12-OMjdqd1_32*ORjdqd1_23
-    Apqpjdqd1_23 = Apqpjdqd1_22+OMjdqd1_32*ORjdqd1_13
-    Jdqd[1] = Apqpjdqd1_13
-    Jdqd[2] = Apqpjdqd1_23
+    ROjdqd1_82 = -C2*S3-S2*C3
+    ROjdqd1_92 = C2*C3-S2*S3
+    RLjdqd1_22 = -s.dpt[3,1]*S2
+    RLjdqd1_32 = s.dpt[3,1]*C2
+    OMjdqd1_12 = qd[2]+qd[3]
+    ORjdqd1_22 = -RLjdqd1_32*qd[2]
+    ORjdqd1_32 = RLjdqd1_22*qd[2]
+    Apqpjdqd1_22 = -ORjdqd1_32*qd[2]
+    Apqpjdqd1_32 = ORjdqd1_22*qd[2]
+    RLjdqd1_23 = ROjdqd1_82*s.dpt[3,2]
+    RLjdqd1_33 = ROjdqd1_92*s.dpt[3,2]
+    ORjdqd1_23 = -OMjdqd1_12*RLjdqd1_33
+    ORjdqd1_33 = OMjdqd1_12*RLjdqd1_23
+    Apqpjdqd1_23 = Apqpjdqd1_22-OMjdqd1_12*ORjdqd1_33
+    Apqpjdqd1_33 = Apqpjdqd1_32+OMjdqd1_12*ORjdqd1_23
+    Jdqd[1] = Apqpjdqd1_23
+    Jdqd[2] = Apqpjdqd1_33
 
 # Number of continuation lines = 0
 
