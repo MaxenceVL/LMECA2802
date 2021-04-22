@@ -8,7 +8,7 @@
       <coordinates>
         <x>0.0</x>
         <y>0.0</y>
-        <z>0.0</z>
+        <z>-9.81</z>
       </coordinates>
     </gravity>
     <baseBodyName>Body_0</baseBodyName>
@@ -68,7 +68,7 @@
         <pointname>origin</pointname>
       </parent>
       <joint>
-        <jointname>T2Blok</jointname>
+        <jointname>T3Blok</jointname>
         <type>T3</type>
         <nature>independent</nature>
         <initialvalue>
@@ -92,7 +92,7 @@
         <x2D>
           <position>
             <x>-87.0</x>
-            <y>-45.0</y>
+            <y>-46.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -106,19 +106,19 @@
           <control_points>
             <control_point>
               <x>155.0</x>
-              <y>-45.0</y>
+              <y>-46.0</y>
             </control_point>
             <control_point>
               <x>155.0</x>
-              <y>48.0</y>
+              <y>47.0</y>
             </control_point>
             <control_point>
               <x>-87.0</x>
-              <y>48.0</y>
+              <y>47.0</y>
             </control_point>
             <control_point>
               <x>-87.0</x>
-              <y>-45.0</y>
+              <y>-46.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -137,9 +137,9 @@
         <pointname>origin</pointname>
       </parent>
       <joint>
-        <jointname>R3Crankshaft</jointname>
+        <jointname>R1Crankshaft</jointname>
         <type>R1</type>
-        <nature>dependent</nature>
+        <nature>independent</nature>
         <initialvalue>
           <qd>100.0</qd>
         </initialvalue>
@@ -221,7 +221,7 @@
         <pointname>CrankshaftRod</pointname>
       </parent>
       <joint>
-        <jointname>R3Shaft</jointname>
+        <jointname>R1Shaft</jointname>
         <type>R1</type>
         <nature>dependent</nature>
         <graphics>
@@ -302,7 +302,7 @@
         <pointname>origin</pointname>
       </parent>
       <joint>
-        <jointname>T2Piston</jointname>
+        <jointname>T3Piston</jointname>
         <type>T3</type>
         <nature>dependent</nature>
         <graphics>
@@ -367,8 +367,8 @@
     <ball>
       <name>Piston</name>
       <endpoint1>
-        <bodyname />
-        <pointname>origin</pointname>
+        <bodyname>Rod</bodyname>
+        <pointname>RodPiston</pointname>
       </endpoint1>
       <endpoint2>
         <bodyname>Piston</bodyname>
@@ -397,6 +397,33 @@
       <lightAndShadowMode>LIGHTS_NO_SPEC_SHADER</lightAndShadowMode>
       <glfwSample>4</glfwSample>
     </opengl>
+    <viewpoints>
+      <!--This is the viewpoint list-->
+      <viewpoint>
+        <name>New_Viewpoint</name>
+        <joint>base</joint>
+        <position>
+          <x>1.0</x>
+          <y>1.0</y>
+          <z>1.0</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+    </viewpoints>
     <lights>
       <!--This is the light list-->
       <directionalLight>

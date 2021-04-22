@@ -1,45 +1,87 @@
 
 ##############################################################
-#	file7.gen 21/04/2021 08:09:38    errors
+#	file4.gen 21/04/2021 10:30:49    errors
 ##############################################################
 git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
+
+	Elimination of the superfluous equations.....................
+
+
+		Maximum simultaneous symbolic expressions :  204
+
+		Maximum number of allocated Kbytes :  9
+
+
+	The symbolic equations have been generated 
+	in the directory: /usr/local/robotran/users/MECA2802/upload/
+
+
+ 		*** Generation symbolique reussie ! ***
+
+
+
+
 ##############################################################
-#	file4.gen 21/04/2021 08:09:38    errors
+#	file3.gen 21/04/2021 10:30:49    errors
 ##############################################################
 git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
+
+	Elimination of the superfluous equations.....................
+
+
+		Maximum simultaneous symbolic expressions :  133
+
+		Maximum number of allocated Kbytes :  6
+
+
+	The symbolic equations have been generated 
+	in the directory: /usr/local/robotran/users/MECA2802/upload/
+
+
+ 		*** Generation symbolique reussie ! ***
+
+
+
+
 ##############################################################
-#	file6.gen 21/04/2021 08:09:38    errors
+#	file2.gen 21/04/2021 10:30:49    errors
 ##############################################################
 git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
+
+ Warning (error_data): useless process for this multibody model !
+
+
 ##############################################################
-#	file3.gen 21/04/2021 08:09:38    errors
+#	file1.gen 21/04/2021 10:30:49    errors
 ##############################################################
 git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
+
+ Warning (error_data): useless process for this multibody model !
+
+
 ##############################################################
-#	file2.gen 21/04/2021 08:09:38    errors
+#	file1b.gen 21/04/2021 10:30:49    errors
 ##############################################################
 git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
-##############################################################
-#	file5.gen 21/04/2021 08:09:38    errors
-##############################################################
-git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
-##############################################################
-#	file0.gen 21/04/2021 08:09:38    errors
-##############################################################
-git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
+	Elimination of the superfluous equations.....................
 
-##############################################################
-#	file1.gen 21/04/2021 08:09:38    errors
-##############################################################
-git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
 
-##############################################################
-#	file1b.gen 21/04/2021 08:09:38    errors
-##############################################################
-git hash : e4323cc50f813318b5c64b3b53763c941a34ce32
+		Maximum simultaneous symbolic expressions :  255
+
+		Maximum number of allocated Kbytes :  11
+
+
+	The symbolic equations have been generated 
+	in the directory: /usr/local/robotran/users/MECA2802/upload/
+
+
+ 		*** Generation symbolique reussie ! ***
+
+
+

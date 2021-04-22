@@ -29,17 +29,17 @@ def user_JointForces(mbs_data, tsim):
     # cleaning previous forces value
     mbs_data.Qq[1:] = 0.
 
-    T2Piston = mbs_data.joint_id['T2Piston']
-    T2Blok  = mbs_data.joint_id['T2Blok']
-    R3Crankshaft  = mbs_data.joint_id['R3Crankshaft']
+    T3Piston = mbs_data.joint_id['T3Piston']
+    T3Blok  = mbs_data.joint_id['T3Blok']
+    R1Crankshaft  = mbs_data.joint_id['R1Crankshaft']
     # Example: damping in joint number 5
     # D = 0.5 # N/(m/s)
     # mbs_data.Qq[5] = -D * mbs_data.qd[5]
     tau = 10
-    mbs_data.Qq[T2Piston] = - tau * mbs_data.qd[T2Piston]
+    mbs_data.Qq[T3Piston] = - tau * mbs_data.qd[T3Piston]
     K = 30000
     D = 5000
     L0 = 0.2
-    mbs_data.Qq[T2Blok] = - ( K*(mbs_data.q[T2Blok]-L0) + D*mbs_data.qd[T2Blok] )
-    mbs_data.Qq[R3Crankshaft] = 3
+    mbs_data.Qq[T3Blok] = - ( K*(mbs_data.q[T3Blok]-L0) + D*mbs_data.qd[T3Blok] )
+    mbs_data.Qq[R1Crankshaft] = 3
     return

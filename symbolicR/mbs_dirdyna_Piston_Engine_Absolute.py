@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr 21 08:00:53 2021
+#	==> Generation Date: Wed Apr 21 10:30:49 2021
 #
 #	==> Project name: Piston_Engine_Absolute
 #
@@ -37,10 +37,12 @@ def dirdyna(M, c, s, tsim):
 # Forward Kinematics
 
     BS92 = -qd[2]*qd[2]
+    AF22 = -s.g[3]*S2
+    AF32 = -s.g[3]*C2
     OM13 = qd[2]+qd[3]
     BS93 = -OM13*OM13
-    AF23 = BS92*s.dpt[3,1]*S3
-    AF33 = BS92*s.dpt[3,1]*C3
+    AF23 = AF22*C3+S3*(AF32+BS92*s.dpt[3,1])
+    AF33 = -AF22*S3+C3*(AF32+BS92*s.dpt[3,1])
     AM23_1 = C2*S3+S2*C3
     AM33_1 = C2*C3-S2*S3
     AM23_2 = -s.dpt[3,1]*C3
@@ -48,6 +50,7 @@ def dirdyna(M, c, s, tsim):
  
 # Backward Dynamics
 
+    FA34 = -s.frc[3,4]-s.m[4]*s.g[3]
     FA23 = -s.frc[2,3]+s.m[3]*AF23
     FA33 = -s.frc[3,3]+s.m[3]*(AF33+BS93*s.l[3,3])
     CF13 = -s.trq[1,3]-FA23*s.l[3,3]
@@ -59,10 +62,11 @@ def dirdyna(M, c, s, tsim):
     CM13_2 = s.In[1,3]-FB23_2*s.l[3,3]
     FB23_3 = -s.m[3]*s.l[3,3]
     CM13_3 = s.In[1,3]-FB23_3*s.l[3,3]
-    FA32 = -s.frc[3,2]+s.m[2]*BS92*s.l[3,2]
-    FF22 = -s.frc[2,2]+FA23*C3-FA33*S3
+    FA22 = -s.frc[2,2]+s.m[2]*AF22
+    FA32 = -s.frc[3,2]+s.m[2]*(AF32+BS92*s.l[3,2])
+    FF22 = FA22+FA23*C3-FA33*S3
     FF32 = FA32+FA23*S3+FA33*C3
-    CF12 = -s.trq[1,2]+CF13+s.frc[2,2]*s.l[3,2]-s.dpt[3,1]*(FA23*C3-FA33*S3)
+    CF12 = -s.trq[1,2]+CF13-FA22*s.l[3,2]-s.dpt[3,1]*(FA23*C3-FA33*S3)
     FB22_1 = s.m[2]*S2
     FB32_1 = s.m[2]*C2
     FM22_1 = FB22_1+FB23_1*C3-FB33_1*S3
@@ -70,7 +74,8 @@ def dirdyna(M, c, s, tsim):
     CM12_1 = CM13_1-FB22_1*s.l[3,2]-s.dpt[3,1]*(FB23_1*C3-FB33_1*S3)
     FB22_2 = -s.m[2]*s.l[3,2]
     CM12_2 = s.In[1,2]+CM13_2-FB22_2*s.l[3,2]-s.dpt[3,1]*(FB23_2*C3-FB33_2*S3)
-    FF31 = -s.frc[3,1]-s.frc[3,4]+FF22*S2+FF32*C2
+    FA31 = -s.frc[3,1]-s.m[1]*s.g[3]
+    FF31 = FA31+FA34+FF22*S2+FF32*C2
     FM31_1 = s.m[1]+s.m[4]+FM22_1*S2+FM32_1*C2
  
 # Symbolic model output
@@ -78,7 +83,7 @@ def dirdyna(M, c, s, tsim):
     c[1] = FF31
     c[2] = CF12
     c[3] = CF13
-    c[4] = -s.frc[3,4]
+    c[4] = FA34
     M[1,1] = FM31_1
     M[1,2] = CM12_1
     M[1,3] = CM13_1

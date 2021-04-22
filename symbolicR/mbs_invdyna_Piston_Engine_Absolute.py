@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Wed Apr 21 08:00:53 2021
+#	==> Generation Date: Wed Apr 21 10:30:49 2021
 #
 #	==> Project name: Piston_Engine_Absolute
 #
@@ -41,15 +41,16 @@ def invdyna(phi,s,tsim):
  
 # Forward Kinematics
 
+    ALPHA31 = qdd[1]-s.g[3]
     BS92 = -qd[2]*qd[2]
-    ALPHA22 = qdd[1]*S2
-    ALPHA32 = qdd[1]*C2
+    ALPHA22 = ALPHA31*S2
+    ALPHA32 = ALPHA31*C2
     OM13 = qd[2]+qd[3]
     OMp13 = qdd[2]+qdd[3]
     BS93 = -OM13*OM13
     ALPHA23 = C3*(ALPHA22-qdd[2]*s.dpt[3,1])+S3*(ALPHA32+BS92*s.dpt[3,1])
     ALPHA33 = C3*(ALPHA32+BS92*s.dpt[3,1])-S3*(ALPHA22-qdd[2]*s.dpt[3,1])
-    ALPHA34 = qdd[1]+qdd[4]
+    ALPHA34 = qdd[4]+ALPHA31
  
 # Backward Dynamics
 
@@ -62,7 +63,7 @@ def invdyna(phi,s,tsim):
     Fq22 = Fs22+Fs23*C3-Fs33*S3
     Fq32 = Fs32+Fs23*S3+Fs33*C3
     Cq12 = -s.trq[1,2]+Cq13+qdd[2]*s.In[1,2]-Fs22*s.l[3,2]-s.dpt[3,1]*(Fs23*C3-Fs33*S3)
-    Fs31 = -s.frc[3,1]+qdd[1]*s.m[1]
+    Fs31 = -s.frc[3,1]+s.m[1]*ALPHA31
     Fq31 = Fs31+Fs34+Fq22*S2+Fq32*C2
  
 # Symbolic model output

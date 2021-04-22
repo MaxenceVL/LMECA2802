@@ -74,7 +74,7 @@ fig = plt.figure(num='Example of plot')
 axis = fig.gca()
 
 # Plotting data's
-axis.plot(results.q[:, 0], results.q[:, 1], label='q[1]')
+axis.plot(results.q[:, 0], results.qd[:, 2], label='q[1]')
 
 # Figure enhancement
 axis.grid(True)

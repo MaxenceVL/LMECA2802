@@ -33,10 +33,5 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
     # k = 1000 #N/m
     # Z0= 0.1  #m
     # Flink = k*(Z-Z0)
-    T2Blok = mbs_data.joint_id['T2Blok']
 
-    K = 30000
-    D = 5000
-    L0 = 0.2
-    mbs_data.Qq[T2Blok] = - ( K*(mbs_data.q[T2Blok]-L0) + D*mbs_data.qd[T2Blok] )
     return Flink
