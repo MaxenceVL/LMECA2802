@@ -37,7 +37,7 @@ def user_JointForces(mbs_data, tsim):
     # mbs_data.Qq[5] = -D * mbs_data.qd[5]
     tau = 10
     mbs_data.Qq[T3Piston] = - tau * mbs_data.qd[T3Piston]
-    K = 30000
+    K = 50000
     D = 5000
     L0 = 0.2
     mbs_data.Qq[T3Blok] = - ( K*(mbs_data.q[T3Blok]-L0) + D*mbs_data.qd[T3Blok] )
